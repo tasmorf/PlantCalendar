@@ -24,4 +24,12 @@ dependencyResolutionManagement {
 
 rootProject.name = "Plant Calendar"
 include(":app")
- 
+include(":core:model")
+include(":core:database")
+include(":core:data")
+include(":core:ui")
+include(":core:navigation")
+include(":core:domain")
+include(":feature:calendar")
+include(":feature:plants")
+include(":feature:settings")
