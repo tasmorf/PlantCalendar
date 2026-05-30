@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasmorf.plantcalendar.core.data.ImageStorage
 import com.tasmorf.plantcalendar.core.data.PlantRepository
+import com.tasmorf.plantcalendar.core.domain.AddPlantUseCase
 import com.tasmorf.plantcalendar.core.model.Plant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddEditPlantViewModel @Inject constructor(
     private val repository: PlantRepository,
+    private val addPlantUseCase: AddPlantUseCase,
     private val imageStorage: ImageStorage,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -74,7 +76,7 @@ class AddEditPlantViewModel @Inject constructor(
             )
             
             val result = if (plantId == null) {
-                repository.insertPlant(plant)
+                addPlantUseCase(plant)
             } else {
                 repository.updatePlant(plant)
             }
@@ -83,6 +85,17 @@ class AddEditPlantViewModel @Inject constructor(
                 state = state.copy(isSaving = false, isSaved = true)
             }.onFailure {
                 state = state.copy(isSaving = false, error = "Failed to save plant")
+            }
+        }
+    }
+
+    fun deletePlant() {
+        val id = plantId ?: return
+        viewModelScope.launch {
+            repository.deletePlant(id).onSuccess {
+                state = state.copy(isDeleted = true)
+            }.onFailure {
+                state = state.copy(error = "Failed to delete plant")
             }
         }
     }

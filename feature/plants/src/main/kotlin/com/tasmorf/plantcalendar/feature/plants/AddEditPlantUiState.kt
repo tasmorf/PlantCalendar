@@ -6,6 +6,7 @@ data class AddEditPlantUiState(
     val imageUrl: String? = null,
     val isSaving: Boolean = false,
     val isSaved: Boolean = false,
+    val isDeleted: Boolean = false,
     val error: String? = null,
     val isEditing: Boolean = false
 ) {

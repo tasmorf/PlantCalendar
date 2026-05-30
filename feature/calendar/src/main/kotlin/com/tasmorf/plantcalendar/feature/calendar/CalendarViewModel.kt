@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDate
@@ -19,6 +18,8 @@ import kotlinx.datetime.toKotlinLocalDate
 import kotlinx.datetime.toLocalDateTime
 import java.time.YearMonth
 import javax.inject.Inject
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
 
 @HiltViewModel
 class CalendarViewModel @Inject constructor(
@@ -27,6 +28,7 @@ class CalendarViewModel @Inject constructor(
 
     private val selectedDate = MutableStateFlow<LocalDate?>(null)
     
+    @OptIn(ExperimentalTime::class)
     private val today = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date
     private val minDate = today.toJavaLocalDate().minusMonths(1).withDayOfMonth(1).toKotlinLocalDate()
     private val maxDate = today.toJavaLocalDate().plusMonths(2).withDayOfMonth(1).minusDays(1).toKotlinLocalDate()
@@ -56,6 +58,7 @@ class CalendarViewModel @Inject constructor(
         selectedDate.value = date
     }
 
+    @OptIn(ExperimentalTime::class)
     fun completeTask(task: PlantTask) {
         viewModelScope.launch {
             val completedAt = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
