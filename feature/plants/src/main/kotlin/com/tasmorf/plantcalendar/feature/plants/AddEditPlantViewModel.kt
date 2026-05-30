@@ -4,18 +4,24 @@ import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasmorf.plantcalendar.core.data.ImageStorage
 import com.tasmorf.plantcalendar.core.data.PlantRepository
 import com.tasmorf.plantcalendar.core.model.Plant
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AddEditPlantViewModel(
+@HiltViewModel
+class AddEditPlantViewModel @Inject constructor(
     private val repository: PlantRepository,
     private val imageStorage: ImageStorage,
-    private val plantId: String? = null
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+
+    private val plantId: String? = savedStateHandle["plantId"]
 
     var state by mutableStateOf(AddEditPlantUiState(isEditing = plantId != null))
         private set

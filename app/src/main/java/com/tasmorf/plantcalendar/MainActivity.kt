@@ -24,8 +24,10 @@ import androidx.navigation.compose.rememberNavController
 import com.tasmorf.plantcalendar.core.navigation.Screen
 import com.tasmorf.plantcalendar.core.ui.PlantCalendarTheme
 import com.tasmorf.plantcalendar.feature.plants.plantsGraph
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

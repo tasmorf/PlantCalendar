@@ -6,8 +6,9 @@ import com.tasmorf.plantcalendar.core.database.asExternalModel
 import com.tasmorf.plantcalendar.core.model.Plant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class OfflineFirstPlantRepository(
+class OfflineFirstPlantRepository @Inject constructor(
     private val plantDao: PlantDao
 ) : PlantRepository {
 

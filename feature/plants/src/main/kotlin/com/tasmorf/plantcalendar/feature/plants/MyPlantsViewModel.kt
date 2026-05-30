@@ -3,13 +3,16 @@ package com.tasmorf.plantcalendar.feature.plants
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tasmorf.plantcalendar.core.data.PlantRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 
-class MyPlantsViewModel(
+@HiltViewModel
+class MyPlantsViewModel @Inject constructor(
     private val repository: PlantRepository
 ) : ViewModel() {
 

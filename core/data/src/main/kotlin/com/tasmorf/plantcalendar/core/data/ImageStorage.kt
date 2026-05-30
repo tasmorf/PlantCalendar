@@ -4,11 +4,15 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
 import java.io.FileOutputStream
 import java.util.UUID
+import javax.inject.Inject
 
-class ImageStorage(private val context: Context) {
+class ImageStorage @Inject constructor(
+    @ApplicationContext private val context: Context
+) {
 
     fun saveImage(uri: Uri): String? {
         return try {

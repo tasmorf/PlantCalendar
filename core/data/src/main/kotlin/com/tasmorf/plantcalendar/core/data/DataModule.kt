@@ -1,9 +1,18 @@
 package com.tasmorf.plantcalendar.core.data
 
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
-val dataModule = module {
-    single<PlantRepository> { OfflineFirstPlantRepository(get()) }
-    single { ImageStorage(androidContext()) }
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class DataModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindPlantRepository(
+        repository: OfflineFirstPlantRepository
+    ): PlantRepository
 }

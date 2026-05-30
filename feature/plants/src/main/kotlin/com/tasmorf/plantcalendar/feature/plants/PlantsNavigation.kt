@@ -4,13 +4,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.tasmorf.plantcalendar.core.navigation.Screen
-import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
+import androidx.hilt.navigation.compose.hiltViewModel
 
 fun NavGraphBuilder.plantsGraph(navController: NavHostController) {
     composable(Screen.MyPlants.route) {
         MyPlantsRoute(
-            viewModel = koinViewModel(),
+            viewModel = hiltViewModel(),
             onAddPlant = { navController.navigate(Screen.AddPlant.route) },
             onEditPlant = { plantId -> navController.navigate(Screen.EditPlant.createRoute(plantId)) }
         )
@@ -18,15 +17,14 @@ fun NavGraphBuilder.plantsGraph(navController: NavHostController) {
     
     composable(Screen.AddPlant.route) {
         AddEditPlantRoute(
-            viewModel = koinViewModel { parametersOf(null) },
+            viewModel = hiltViewModel(),
             onBack = { navController.popBackStack() }
         )
     }
 
-    composable(Screen.EditPlant.route) { backStackEntry ->
-        val plantId = backStackEntry.arguments?.getString("plantId")
+    composable(Screen.EditPlant.route) {
         AddEditPlantRoute(
-            viewModel = koinViewModel { parametersOf(plantId) },
+            viewModel = hiltViewModel(),
             onBack = { navController.popBackStack() }
         )
     }
