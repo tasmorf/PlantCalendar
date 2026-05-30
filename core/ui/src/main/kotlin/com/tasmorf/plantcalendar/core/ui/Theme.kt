@@ -32,6 +32,7 @@ fun PlantCalendarTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
+        typography = Typography,
         content = content
     )
 }
