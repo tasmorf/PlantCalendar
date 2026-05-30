@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.tasmorf.plantcalendar.core.ui"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 28
