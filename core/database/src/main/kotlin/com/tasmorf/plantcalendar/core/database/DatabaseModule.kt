@@ -29,4 +29,9 @@ object DatabaseModule {
     fun providePlantDao(database: PlantDatabase): PlantDao {
         return database.plantDao()
     }
+
+    @Provides
+    fun provideTaskDao(database: PlantDatabase): TaskDao {
+        return database.taskDao()
+    }
 }

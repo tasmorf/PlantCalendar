@@ -23,6 +23,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.tasmorf.plantcalendar.core.navigation.Screen
 import com.tasmorf.plantcalendar.core.ui.PlantCalendarTheme
+import com.tasmorf.plantcalendar.feature.calendar.calendarGraph
 import com.tasmorf.plantcalendar.feature.plants.plantsGraph
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -82,7 +83,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = Screen.MyPlants.route,
                             modifier = Modifier.padding(innerPadding)
                         ) {
-                            composable(Screen.Calendar.route) { Text("Calendar Screen") }
+                            calendarGraph()
                             plantsGraph(navController)
                             composable(Screen.Settings.route) { Text("Settings Screen") }
                         }

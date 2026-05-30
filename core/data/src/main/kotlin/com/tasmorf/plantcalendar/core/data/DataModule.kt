@@ -15,4 +15,10 @@ abstract class DataModule {
     abstract fun bindPlantRepository(
         repository: OfflineFirstPlantRepository
     ): PlantRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindTaskRepository(
+        repository: OfflineFirstTaskRepository
+    ): TaskRepository
 }
